@@ -37,6 +37,14 @@ case $host in
     AC_CHECK_LIB(pthread, pthread_create, , AC_MSG_ERROR(cursynth requires the pthread library!))
   ;;
 
+  *-*-freebsd*)
+    AC_MSG_RESULT(using Jack)
+    api="$api -D__UNIX_JACK__"
+    LIBS="$LIBS -ljack -lintl -L/usr/local/lib"
+    AC_CHECK_LIB(pthread, pthread_create, , AC_MSG_ERROR(cursynth requires the pthread library!))
+    AC_CHECK_LIB(asound, snd_pcm_open, , AC_MSG_ERROR(Jack support also requires the asound Library!))
+  ;;
+
   *-*-linux*)
   AC_ARG_WITH(jack, [  --with-jack = choose JACK server support (Mac OSX and GNU/Linux only)], [
     api="$api -D__UNIX_JACK__"
