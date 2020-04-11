@@ -324,7 +324,7 @@ namespace mopo {
                       &buffer_size, &audioCallback, (void*)this);
       dac_.startStream();
     }
-    catch (RtError& error) {
+    catch (RtAudioError& error) {
       error.printMessage();
       exit(0);
     }
@@ -460,7 +460,7 @@ namespace mopo {
     try {
       dac_.stopStream();
     }
-    catch (RtError& error) {
+    catch (RtAudioError& error) {
       error.printMessage();
     }
 
